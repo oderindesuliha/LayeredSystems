@@ -8,34 +8,58 @@ import java.util.List;
 import java.util.Optional;
 
 public class Residents implements ResidentRepository{
-
+    private int count = 0;
     private List<Resident> residents = new ArrayList<>();
 
     @Override
     public Resident save(Resident resident) {
-        residents.add(resident);
-        return resident;
-    }
+            if (isNew(resident)) saveNew(resident);else update(resident);
+            return resident;
+        }
 
-    @Override
-    public void delete(long id) {
-
-    }
-
-    @Override
-    public Optional<Resident> findById(long id) {
-        for (Resident resident : residents) {
-            if (resident.getId() == id) {
-                return Optional.of(resident);
+    private void update(Resident resident) {
+        for (int count = 0; count < residents.size(); count++) {
+            if (residents.get(count).getId() == resident.getId()) {
+                residents.set(count, resident);
+                return;
             }
         }
-        return Optional.empty();
+    }
+
+    private void saveNew(Resident resident) {
+        resident.setId(generateId());
+        residents.add(resident);
+    }
+
+    private int generateId() {
+        return ++count;
+    }
+    private boolean isNew(Resident resident) {
+    return resident.getId() == 0;
     }
 
     @Override
-    public Optional<Resident> findByFullName(String firstName) {
+    public void delete(int id) {
+        for (int count = 0; count < residents.size(); count++) {
+            if (residents.get(count).getId() == id) {
+                residents.remove(count);
+                return;
+            }
+        }
+
+    }
+
+    @Override
+    public Optional<Resident> findById(int id) {
+        return residents.stream()
+                .filter(resident -> resident.getId() == id)
+                .findFirst();
+        }
+
+    @Override
+    public Optional<Resident> findByFullName(String fullName) {
         for (Resident resident : residents) {
-            if (resident.getFullName().equals(firstName)) {
+            if (resident.getFullName().equals(fullName)) {
                 return Optional.of(resident);
             }
         }
@@ -49,6 +73,18 @@ public class Residents implements ResidentRepository{
 
     @Override
     public List<Resident> findAll() {
-        return List.of();
+        return residents;
     }
+
+    @Override
+    public boolean existById(int id) {
+        return findById(id).isPresent();
+    }
+
+    @Override
+    public boolean checkPassword(String password, int id) {
+        Optional<Resident> resident = findById(id);
+        return resident.isPresent() && resident.get().verifyPassword(password);
+    }
+
 }

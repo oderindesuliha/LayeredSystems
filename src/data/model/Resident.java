@@ -1,7 +1,7 @@
 package data.model;
 
 public class Resident {
-    private long id;
+    private int id;
     private String fullName;
     private String phone;
     private String email;
@@ -44,13 +44,17 @@ public class Resident {
         this.password = password;
     }
 
-    public long getId() {
+    public int getId() {
 
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean verifyPassword(String password) {
+        return this.password.equals(password);
     }
 }
 

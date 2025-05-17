@@ -7,10 +7,12 @@ import java.util.Optional;
 
 public interface ResidentRepository{
     Resident save(Resident resident);
-    void delete(long id);
-    Optional<Resident> findById(long id);
-    Optional<Resident> findByFullName(String firstName);
+    void delete(int id);
+    Optional<Resident> findById(int id);
+    Optional<Resident> findByFullName(String fullName);
     long count();
     List<Resident> findAll();
+    boolean existById(int id);
+    boolean checkPassword(String password, int id);
 
 }
