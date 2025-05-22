@@ -48,11 +48,11 @@ class ResidentsTest {
         Resident savedResident2 = residents.save(resident2);
         assertEquals(savedResident2, residents.findByFullName("Damini Bryan").get());
     }
-
         @Test
         public void testToRegisterResident_UpdateResidentWithId_CountIsOneTest () {
         Resident resident1 = new Resident();
         residents.save(resident1);
+        resident1.setFullName("Wande Blessing");
         assertEquals(1, residents.count());
 
         Resident resident2 = new Resident();
