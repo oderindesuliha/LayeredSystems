@@ -2,9 +2,8 @@ package data.repository;
 
 import data.model.AccessCode;
 
-public interface AccessCodeRepository extends ResidentRepository{
-    AccessCode findByAccessCode(String accessCode);
-    AccessCode findByResidentId(Long residentId);
+public interface AccessCodeRepository{
+    AccessCode findByResidentId(int residentId);
     AccessCode findByVisitorId(Long visitorId);
     AccessCode findByResidentAndVisitorId(Long residentId, Long visitorId);
     AccessCode findByVisitor(Long visitorId);

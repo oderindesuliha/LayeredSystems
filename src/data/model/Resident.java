@@ -45,7 +45,6 @@ public class Resident {
     }
 
     public int getId() {
-
         return id;
     }
 

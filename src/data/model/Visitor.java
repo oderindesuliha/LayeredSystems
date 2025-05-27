@@ -2,7 +2,7 @@ package data.model;
 
 public class Visitor {
     private String fullName;
-    private String id;
+    private int id;
     private Resident resident;
     private String address;
     private String phone;
@@ -15,11 +15,11 @@ public class Visitor {
         this.fullName = fullName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
