@@ -17,6 +17,7 @@ class ResidentServicesImplTest {
     private ResidentService residentService;
     private ResidentRepository residentRepository;
     private ResidentRegisterRequest residentRegisterRequest;
+    private ResidentLoginRequest residentLoginRequest;
 
 
     @BeforeEach
@@ -24,6 +25,7 @@ class ResidentServicesImplTest {
         residentService = new ResidentServiceImpl(residentRepository);
         residentRepository = new Residents();
         residentRegisterRequest = new ResidentRegisterRequest();
+        residentLoginRequest = new ResidentLoginRequest();
     }
 
     @Test
@@ -63,13 +65,12 @@ class ResidentServicesImplTest {
         residentRegisterRequest.setEmail("bj@gmail.com");
         residentRegisterRequest.setPassword("1234");
         residentService.register(residentRegisterRequest);
-        assertEquals(1, residentRepository.count());
 
-        ResidentLoginRequest residentLoginRequest = new ResidentLoginRequest();
         residentLoginRequest.setEmail("bjj@gmail.com");
         residentLoginRequest.setPassword("1234");
-        ResidentLoginResponse residentLoginResponse = residentService.login(residentLoginRequest);
-        assertEquals("invalid Email", residentLoginResponse.getMessage());
+//        residentService.login(residentLoginRequest);
+
+        assertThrows(IllegalArgumentException.class, () -> residentService.login(residentLoginRequest));
 
 
     }

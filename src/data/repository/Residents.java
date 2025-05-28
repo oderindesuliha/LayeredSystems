@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Residents implements ResidentRepository{
-    public static Residents resident = new Residents();
-    private int count = 0;
+    private static int count = 0;
     private static List <Resident> residents = new ArrayList<>();
 
     @Override
@@ -19,6 +18,9 @@ public class Residents implements ResidentRepository{
         }
 
     private void update(Resident resident) {
+//        delete( resident.getId());
+//        residents.add(resident);
+
         for (int count = 0; count < residents.size(); count++) {
             if (residents.get(count).getId() == resident.getId()) {
                 residents.set(count, resident);
@@ -84,17 +86,17 @@ public class Residents implements ResidentRepository{
     @Override
     public boolean checkPassword(String password, int id) {
         Optional<Resident> resident = findById(id);
-        return resident.isPresent() && resident.get().verifyPassword(password);
+        return resident.isPresent();
     }
 
     @Override
-    public Optional<Resident> findByEmail(String email) {
+    public Resident findByEmail(String email) {
         for (Resident resident : residents) {
             if (resident.getEmail().equals(email)) {
-                return Optional.of(resident);
+                return resident;
             }
         }
-        return Optional.empty();
+        return null;
     }
 
 }

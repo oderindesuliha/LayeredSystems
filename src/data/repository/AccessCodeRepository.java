@@ -8,5 +8,6 @@ public interface AccessCodeRepository{
     AccessCode findByResidentAndVisitorId(Long residentId, Long visitorId);
     AccessCode findByVisitor(Long visitorId);
     AccessCode findByResident(Long residentId);
+    AccessCode save(AccessCode acc);
 
 }

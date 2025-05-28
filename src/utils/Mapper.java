@@ -29,22 +29,19 @@ public class Mapper {
         return response;
     }
 
-    public static ResidentLoginResponse loginMap(ResidentLoginRequest residentLoginRequest) {
-        Resident resident = new Resident();
-        resident.setEmail(residentLoginRequest.getEmail());
-        resident.setPassword(residentLoginRequest.getPassword());
-        residentRepository.checkPassword(residentLoginRequest.getPassword(), resident.getId());
+    public static ResidentLoginResponse loginMap(Resident resident) {
+        ResidentLoginResponse residentLoginResponse = new ResidentLoginResponse();
+        residentLoginResponse.setEmail(resident.getEmail());
+        validateEmail(residentLoginResponse.getEmail());
 
-        ResidentLoginResponse loginResponse = new ResidentLoginResponse();
-        loginResponse.setMessage("Successfully logged in");
-        loginResponse.getMessage();
-
-        return loginResponse;
+        return residentLoginResponse;
     }
 
-    private static void validateEmail(ResidentLoginRequest residentLoginRequest){
-        if(!residentRepository.findByEmail(residentLoginRequest.getEmail()).isPresent()){
+    private static void validateEmail(String email) {
+        Resident isValidEmail = residentRepository.findByEmail(email);
+        if(isValidEmail == null){
             throw new IllegalArgumentException("invalid Email");
         }
     }
+
 }

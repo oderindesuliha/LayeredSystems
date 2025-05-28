@@ -52,8 +52,8 @@ public class Resident {
         this.id = id;
     }
 
-    public boolean verifyPassword(String password) {
-        return this.password.equals(password);
+    public String getPassword() {
+        return this.password;
     }
 }
 

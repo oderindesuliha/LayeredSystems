@@ -14,6 +14,6 @@ public interface ResidentRepository{
     List<Resident> findAll();
     boolean existById(int id);
     boolean checkPassword(String password, int id);
-    Optional<Resident> findByEmail(String email);
+    Resident findByEmail(String email);
 
 }

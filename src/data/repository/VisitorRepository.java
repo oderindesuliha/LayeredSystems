@@ -11,5 +11,7 @@ public interface VisitorRepository{
     Visitor saveVisitor(Visitor visitor);
     void deleteVisitor(int id);
     long count();
+    Optional<Visitor> findById(int id);
+
 
 }

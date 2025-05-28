@@ -1,13 +1,18 @@
 package data.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class AccessCode {
-    private String accessCode;
-    private Resident resident;
+    private String id;
+    private String otp;
+    private Resident whomToSee;
     private LocalDateTime timeCreated = LocalDateTime.now();
     private Visitor visitor;
 
+    public AccessCode(String otp) {
+        this.otp = generateAccessCode();
+    }
 
     public Visitor getVisitor() {
         return visitor;
@@ -25,20 +30,25 @@ public class AccessCode {
         this.timeCreated = timeCreated;
     }
 
-    public Resident getResident() {
-        return resident;
+    public Resident getWhomToSee() {
+        return whomToSee;
     }
 
-    public void setResident(Resident resident) {
-        this.resident = resident;
+    public void setWhomToSee(Resident whomToSee) {
+        this.whomToSee = whomToSee;
     }
 
     public String getAccessCode() {
-        return accessCode;
+        return id;
     }
 
     public void setAccessCode(String accessCode) {
-        this.accessCode = accessCode;
+        this.id = id;
+    }
+
+    public String generateAccessCode() {
+        return UUID.randomUUID().toString();
+
     }
 
 

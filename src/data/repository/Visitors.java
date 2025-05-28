@@ -4,6 +4,7 @@ import data.model.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Visitors implements VisitorRepository {
     private static Visitors visitor = new Visitors();
@@ -55,6 +56,16 @@ public class Visitors implements VisitorRepository {
     @Override
     public long count() {
         return visitors.size();
+    }
+
+    @Override
+    public Optional<Visitor> findById(int id) {
+        for (Visitor visitor : visitors) {
+            if (visitor.getId() == id) {
+                return Optional.of(visitor);
+            }
+        }
+        return Optional.empty();
     }
 }
 
